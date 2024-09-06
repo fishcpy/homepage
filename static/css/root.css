@@ -48,7 +48,7 @@
 /*卡片模糊背景＋黑色透明卡片+白色svg**/
 html {
     --name: 主题1;
-    --main_bg_color: url(../img/background.jpg);
+    --main_bg_color: url(https://gitee.com/liuwb1234/blog-image-transfer/releases/download/1/%E6%B5%81%E6%B5%AA%E5%9C%B0%E7%90%83.jpg);
     --main_text_color: #eeeeee;
     --gradient: linear-gradient(120deg, #bd34fe, #e0321b 30%, #41d1ff 60%);
     --purple_text_color: #747bff;
@@ -69,7 +69,7 @@ html {
 
     /*图片模糊背景＋白色透明卡片+黑色svg*/
     --name: 主题2;
-    --main_bg_color: url(../img/background.jpg);
+    --main_bg_color: url(https://gitee.com/liuwb1234/blog-image-transfer/releases/download/1/%E6%B5%81%E6%B5%AA%E5%9C%B0%E7%90%83.jpg);
     --main_text_color: #000000;
     --gradient: linear-gradient(120deg, #bd34fe, #e0321b 30%, #41d1ff 60%);
     --purple_text_color: #747bff;
@@ -132,7 +132,7 @@ html {
 html {
     /*图片模糊背景＋黑色透明卡片+白色svg**/
     --name: 主题5;
-    --main_bg_color: url(../img/background.jpg);
+    --main_bg_color: url(https://gitee.com/liuwb1234/blog-image-transfer/releases/download/1/%E6%B5%81%E6%B5%AA%E5%9C%B0%E7%90%83.jpg);
     --main_text_color: #eeeeee;
     --gradient: linear-gradient(120deg, #bd34fe, #e0321b 30%, #41d1ff 60%);
     --purple_text_color: #747bff;
