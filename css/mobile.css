@@ -43,11 +43,6 @@
         margin-left: 0.75rem;
     }
 
-    /*一言*/
-    .col.hitokotos {
-        display: none;
-    }
-
     /*时间卡片*/
     .col.times {
         margin-left: 0rem;

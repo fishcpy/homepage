@@ -3,7 +3,7 @@
 
 <head>
     <!-- um -->
-    <script defer src="https://um.fishcpy.top/script.js" data-website-id="b4331865-5683-44a8-a7ba-6006d918f1c1"></script>
+    <script defer src="https://um.fis.ink/script.js" data-website-id="21724dcb-8d07-42d8-b32f-446ff7a8b881"></script>
     <!-- 基础信息 -->
     <meta charset="utf-8">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
@@ -43,6 +43,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     -->
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <!-- Aplayer -->
@@ -63,6 +65,8 @@
 </head>
 
 <body>
+    <!-- 粒子背景 -->
+    <div id="particles-js"></div>
     <!--加载动画-->
     <div id="loading-box">
         <div class="loading-left-bg"></div>
@@ -99,62 +103,6 @@
         <div id="g-pointer-2"></div>
         <!-- 主体内容 -->
         <main id="main" class="main">
-            <!-- 搜索框 -->
-            <div class="close-btn">
-                <span class="fas fa-times"></span>
-            </div>
-            <div class="search-btn">
-                <span class="fas fa-search"></span>
-            </div>
-            <div class="search-data">
-                <input type="text" id="inp" required/>
-                <div class="line"></div>
-                <label>Type to search...</label>
-                <span class="fas fa-search" id="btn"></span>
-            </div>
-
-            <script>
-                var oInp = document.getElementById('inp');
-                var oBtn = document.getElementById('btn');
-            
-                oBtn.onclick = function () {
-                    Search();
-                }
-            
-                document.onkeydown = function () {
-                    if (event.keyCode == 13) {
-                        Search();
-                    }
-                }
-            
-                function Search() {
-                    var url = 'https://cn.bing.com/search?q=' + oInp.value;
-                    window.open(url,'_self');
-                }
-            </script>
-
-            <script>
-                $(".search-btn").click(function(){
-                    $(this).css("display","none");
-                    $(".search-data").fadeIn(500);
-                    $(".close-btn").fadeIn(500);
-                    $(".search-data .line").addClass("active");
-                    setTimeout(function(){
-                        $("input").focus();
-                        $(".search-data label").fadeIn(500);
-                        $(".search-data span").fadeIn(500);
-                    }, 800);
-                });
-                $(".close-btn").click(function(){
-                    $(".search-btn").fadeIn(800);
-                    $(".search-data").fadeOut(500);
-                    $(".close-btn").fadeOut(500);
-                    $(".search-data .line").removeClass("active");
-                    $("input").val("");
-                    $(".search-data label").fadeOut(500);
-                    $(".search-data span").fadeOut(500);
-                });
-            </script>
             <div class="container" id="container">
                 <div class="row" id="row">
                     <div class="col left">
@@ -192,7 +140,7 @@
                     </div>
                     <!--第二屏 Logo-->
                     <div class="logo cards" style="display: none" id="changemore">
-                        <a class="logo-text" id="logo-text-small">fishcpy.cn</a>
+                        <a class="logo-text" id="logo-text-small">fis.ink</a>
                     </div>
                     <div class="col right">
                         <div class="main-right">
@@ -464,6 +412,7 @@
         <div class="noscript fixed-top">请开启 JavaScript</div>
     </noscript>
     <!-- JS -->
+    <script type="text/javascript" src="./js/particles.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
     <script type="text/javascript" src="./js/set.js"></script>
     <script type="text/javascript" src="./js/time.js"></script>

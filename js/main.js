@@ -155,13 +155,17 @@ const getWeather = () => {
       )
         .then((response) => response.json())
         .then((res) => {
-          if (res.status) {
+          if (res.status && res.lives && res.lives.length > 0) {
             $("#wea_text").html(res.lives[0].weather);
             $("#tem_text").html(res.lives[0].temperature + "°C&nbsp;");
             $("#win_text").html(res.lives[0].winddirection + "风");
             $("#win_speed").html(res.lives[0].windpower + "级");
           } else {
             console.error("天气信息获取失败");
+            $("#wea_text").html("未知");
+            $("#tem_text").html("--°C&nbsp;");
+            $("#win_text").html("--风");
+            $("#win_speed").html("--级");
             iziToast.show({
               timeout: 2000,
               icon: "fa-solid fa-cloud-sun",
