@@ -7,7 +7,7 @@
           <router-link to="/" class="flex items-center space-x-3">
             <div class="w-8 h-8 rounded-full overflow-hidden">
               <img 
-                src="https://www.fis.ink/img/logo_c.png" 
+                src="https://file.fis.ink/img/fishcpy/logo_c.png" 
                 alt="fishcpy logo" 
                 class="w-full h-full object-cover" 
               />
