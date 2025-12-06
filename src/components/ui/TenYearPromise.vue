@@ -17,12 +17,12 @@
         </p>
         <div class="flex items-center space-x-4">
           <div class="text-center">
-            <div class="text-2xl font-bold text-white">{{ daysPassed }}</div>
-            <div class="text-xs text-slate-200 dark:text-slate-300">天</div>
+            <div class="text-2xl font-bold text-white">{{ yearsPassed }}</div>
+            <div class="text-xs text-slate-200 dark:text-slate-300">年</div>
           </div>
           <div class="text-center">
-            <div class="text-lg font-semibold text-amber-200">{{ Math.floor(daysPassed / 365) }}</div>
-            <div class="text-xs text-slate-200 dark:text-slate-300">年</div>
+            <div class="text-lg font-semibold text-amber-200">{{ remainingDaysInYear }}</div>
+            <div class="text-xs text-slate-200 dark:text-slate-300">天</div>
           </div>
         </div>
       </div>
@@ -73,6 +73,16 @@ const currentDate = ref(new Date())
 const daysPassed = computed(() => {
   const diffTime = currentDate.value.getTime() - startDate.getTime()
   return Math.floor(diffTime / (1000 * 60 * 60 * 24))
+})
+
+// 计算已过年数
+const yearsPassed = computed(() => {
+  return Math.floor(daysPassed.value / 365)
+})
+
+// 计算剩余天数（扣除整年后）
+const remainingDaysInYear = computed(() => {
+  return daysPassed.value % 365
 })
 
 // 计算进度百分比（十年 = 3650天）
