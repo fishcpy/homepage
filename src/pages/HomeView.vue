@@ -3,7 +3,7 @@
     class="min-h-screen bg-black"
   >
     <!-- Hero Banner Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden -mt-16 pt-16">
       <!-- Prism Background -->
       <div class="absolute inset-0 w-full h-full bg-black z-0 pointer-events-none">
         <Prism
