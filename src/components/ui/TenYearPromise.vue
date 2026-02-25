@@ -13,7 +13,7 @@
           </div>
         </div>
         <p class="text-slate-100 dark:text-slate-200 text-sm mb-4">
-          从 {{ startDate }} 开始的坚持之路
+          从 {{ startDateLabel }} 开始的坚持之路
         </p>
         <div class="flex items-center space-x-4">
           <div class="text-center">
@@ -21,7 +21,7 @@
             <div class="text-xs text-slate-200 dark:text-slate-300">年</div>
           </div>
           <div class="text-center">
-            <div class="text-lg font-semibold text-amber-200">{{ remainingDaysInYear }}</div>
+            <div class="text-lg font-semibold text-amber-200">{{ daysIntoCurrentYear }}</div>
             <div class="text-xs text-slate-200 dark:text-slate-300">天</div>
           </div>
         </div>
@@ -53,6 +53,12 @@
        <div class="text-xs text-slate-200 dark:text-slate-300 mt-2">
          还有 {{ remainingDays }} 天到达十年目标
        </div>
+      <div class="mt-4 text-xs text-slate-200 dark:text-slate-300 space-y-0.5">
+        <div class="font-semibold tracking-wide uppercase text-white/70">时间之约日志</div>
+        <div>起点：{{ startDateLabel }}</div>
+        <div>目标：{{ endDateLabel }}</div>
+        <div>当前：{{ currentDateLabel }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -63,51 +69,59 @@ import { usePersonalStore } from '@/stores/personal'
 
 const personalStore = usePersonalStore()
 
-// 十年之约开始日期
-const startDate = new Date('2024-09-06')
+const MS_PER_DAY = 1000 * 60 * 60 * 24
+const TEN_YEARS = 10
+const startDate = new Date(2024, 8, 6)
+const endDate = new Date(startDate)
+endDate.setFullYear(endDate.getFullYear() + TEN_YEARS)
+
+const zhDateFormatter = new Intl.DateTimeFormat('zh-CN', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+})
+
+const startDateLabel = zhDateFormatter.format(startDate)
+const endDateLabel = zhDateFormatter.format(endDate)
+
 const currentDate = ref(new Date())
+const totalPromiseDays = Math.round((endDate.getTime() - startDate.getTime()) / MS_PER_DAY)
 
+const getYearsPassed = (from: Date, to: Date) => {
+  let diff = to.getFullYear() - from.getFullYear()
+  const monthDiff = to.getMonth() - from.getMonth()
+  const dayDiff = to.getDate() - from.getDate()
+  if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+    diff -= 1
+  }
+  return Math.max(diff, 0)
+}
 
-
-// 计算已过天数
 const daysPassed = computed(() => {
   const diffTime = currentDate.value.getTime() - startDate.getTime()
-  return Math.floor(diffTime / (1000 * 60 * 60 * 24))
+  return Math.floor(diffTime / MS_PER_DAY)
 })
 
-// 计算已过年数
-const yearsPassed = computed(() => {
-  return Math.floor(daysPassed.value / 365)
+const yearsPassed = computed(() => getYearsPassed(startDate, currentDate.value))
+
+const daysIntoCurrentYear = computed(() => {
+  const baseline = new Date(startDate)
+  baseline.setFullYear(baseline.getFullYear() + yearsPassed.value)
+  const diff = currentDate.value.getTime() - baseline.getTime()
+  return diff < 0 ? 0 : Math.floor(diff / MS_PER_DAY)
 })
 
-// 计算剩余天数（扣除整年后）
-const remainingDaysInYear = computed(() => {
-  return daysPassed.value % 365
-})
+const progress = computed(() => Math.min((daysPassed.value / totalPromiseDays) * 100, 100))
+const progressPercentage = computed(() => progress.value.toFixed(2))
+const remainingDays = computed(() => Math.max(totalPromiseDays - daysPassed.value, 0))
+const currentDateLabel = computed(() => zhDateFormatter.format(currentDate.value))
 
-// 计算进度百分比（十年 = 3650天）
-const progress = computed(() => {
-  const totalDays = 365 * 10
-  return Math.min((daysPassed.value / totalDays) * 100, 100)
-})
-
-const progressPercentage = computed(() => {
-  return progress.value.toFixed(2)
-})
-
-// 计算剩余天数
-const remainingDays = computed(() => {
-  const totalDays = 365 * 10
-  return Math.max(totalDays - daysPassed.value, 0)
-})
-
-// 定时器更新当前日期
 let timer: number
 
 onMounted(() => {
-  timer = setInterval(() => {
+  timer = window.setInterval(() => {
     currentDate.value = new Date()
-  }, 1000 * 60 * 60) // 每小时更新一次
+  }, 1000 * 60 * 60)
 })
 
 onUnmounted(() => {

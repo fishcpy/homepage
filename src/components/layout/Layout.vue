@@ -10,31 +10,6 @@
     
     <Header />
 
-    <!-- 全局鼠标光晕（与 /portfolio 卡片风格协调） -->
-    <div
-      v-if="showHalo"
-      class="global-mouse-halo fixed inset-0 pointer-events-none hidden md:block z-30 mix-blend-screen"
-      :style="{ '--hx': haloX + 'px', '--hy': haloY + 'px' }"
-    >
-      <!-- 紫色边界光晕，与 PortfolioMagicCard glow-color=132,0,255 一致，强度更柔和 -->
-      <div
-        class="absolute inset-0"
-        :style="{
-          background: `radial-gradient(${haloRadius}px circle at var(--hx) var(--hy), rgba(${haloColor}, 0.18), rgba(${haloColor}, 0.08) 45%, transparent 75%)`,
-          filter: 'blur(2px)',
-          transition: 'opacity 120ms ease-out'
-        }"
-      ></div>
-      <!-- 细腻的白色聚光层，提升层次 -->
-      <div
-        class="absolute inset-0"
-        :style="{
-          background: `radial-gradient(${spotlightRadius}px circle at var(--hx) var(--hy), rgba(255,255,255,0.08), transparent 60%)`,
-          transition: 'opacity 120ms ease-out'
-        }"
-      ></div>
-    </div>
-    
     <main class="flex-1 relative z-10 pt-16">
     <Transition 
       :name="transitionName" 
@@ -52,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, onUnmounted } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import Header from './Header.vue'
 import Footer from './Footer.vue'
@@ -119,55 +94,6 @@ const onLeave = (el: Element, done: () => void) => {
   }, 400)
 }
 
-// ===== 全局鼠标光晕逻辑（与 Portfolio 卡片鼠标光晕风格协调） =====
-const showHalo = ref(false)
-const haloX = ref(0)
-const haloY = ref(0)
-const haloColor = '132, 0, 255' // 与 /portfolio 中 PortfolioMagicCard 的 glow-color 保持一致
-const haloRadius = 300
-const spotlightRadius = 220
-
-let targetX = 0
-let targetY = 0
-let rafId: number | null = null
-
-const isCoarsePointer = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(pointer: coarse)').matches
-if (isCoarsePointer) {
-  showHalo.value = false
-}
-
-const animate = () => {
-  // 简单插值，避免抖动
-  haloX.value += (targetX - haloX.value) * 0.18
-  haloY.value += (targetY - haloY.value) * 0.18
-  rafId = requestAnimationFrame(animate)
-}
-
-const handleMouseMove = (e: MouseEvent) => {
-  targetX = e.clientX
-  targetY = e.clientY
-  if (!rafId) rafId = requestAnimationFrame(animate)
-}
-
-const handleMouseLeaveWindow = () => {
-  // 悬停离开时逐渐淡出
-  // 这里不隐藏容器，仅将目标位置缓慢移向屏幕中心，保持柔和
-  targetX = window.innerWidth / 2
-  targetY = window.innerHeight / 2
-}
-
-onMounted(() => {
-  if (!showHalo.value) return
-  window.addEventListener('mousemove', handleMouseMove, { passive: true })
-  window.addEventListener('mouseleave', handleMouseLeaveWindow, { passive: true })
-})
-
-onUnmounted(() => {
-  window.removeEventListener('mousemove', handleMouseMove as any)
-  window.removeEventListener('mouseleave', handleMouseLeaveWindow as any)
-  if (rafId) cancelAnimationFrame(rafId)
-  rafId = null
-})
 </script>
 
 <style scoped>
