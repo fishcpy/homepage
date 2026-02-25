@@ -1,27 +1,22 @@
 <template>
   <div 
-    class="min-h-screen bg-black" 
-    @mousemove="handleGlobalMouseMove"
-    @mouseleave="handleGlobalMouseLeave"
+    class="min-h-screen bg-black"
   >
     <!-- Hero Banner Section -->
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <!-- DotGrid Background -->
-      <div class="fixed inset-0 w-full h-full bg-black z-0">
-        <DotGrid 
-          ref="dotGridRef"
-          :dot-size="4" 
-          :gap="20" 
-          base-color="#6B7280" 
-          active-color="#9CA3AF" 
-          :proximity="120" 
-          :speed-trigger="60" 
-          :shock-radius="80" 
-          :shock-strength="0.8" 
-          :max-speed="2000" 
-          :resistance="800" 
-          :return-duration="1.5" 
-          class="w-full h-full" 
+      <!-- Prism Background -->
+      <div class="absolute inset-0 w-full h-full bg-black z-0 pointer-events-none">
+        <Prism
+          animation-type="rotate"
+          :time-scale="0.5"
+          :height="3.5"
+          :base-width="5.5"
+          :scale="3.6"
+          :hue-shift="0"
+          :color-frequency="1"
+          :noise="0.08"
+          :glow="1"
+          class="block w-full h-full"
         />
       </div>
 
@@ -314,46 +309,20 @@
 </style>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { Eye, Mail, Code, ArrowRight, ExternalLink, Github, Phone } from 'lucide-vue-next'
+import { computed } from 'vue'
+import { ExternalLink, Github } from 'lucide-vue-next'
 import { usePersonalStore } from '@/stores/personal'
 import { useProjectsStore } from '@/stores/projects'
 import { useSitesStore } from '@/stores/sites'
-import Button from '@/components/ui/Button.vue'
-import Card from '@/components/ui/Card.vue'
 import TenYearPromise from '@/components/ui/TenYearPromise.vue'
 import SplitText from '@/components/SplitText.vue'
 import ProjectMagicCard from '@/components/vue-bits/ProjectMagicCard.vue'
 import MagicCard from '@/components/ui/MagicCard.vue'
-import DotGrid from '@/components/DotGrid.vue'
-
-const dotGridRef = ref<InstanceType<typeof DotGrid>>()
-
-const handleGlobalMouseMove = (event: MouseEvent) => {
-  if (dotGridRef.value) {
-    dotGridRef.value.handleMouseMove(event)
-  }
-}
-
-const handleGlobalMouseLeave = () => {
-  if (dotGridRef.value) {
-    dotGridRef.value.handleMouseLeave()
-  }
-}
-
+import Prism from '@/components/Prism.vue'
 
 const personalStore = usePersonalStore()
 const projectsStore = useProjectsStore()
 const sitesStore = useSitesStore()
 const featuredProjects = computed(() => projectsStore.featuredProjects)
 const featuredSites = computed(() => sitesStore.featuredSites)
-
-const scrollToSection = (sectionId: string) => {
-  const element = document.getElementById(sectionId)
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' })
-  }
-}
-
-
 </script>
