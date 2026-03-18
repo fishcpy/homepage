@@ -1,0 +1,14 @@
+{
+    "redirects": [
+        {
+            "source": "/img/logo.png",
+            "destination": "https://file.fis.ink/img/fishcpy/logo.png",
+            "statusCode": 301
+        },
+        {
+            "source": "/img/logo_c.png",
+            "destination": "https://file.fis.ink/img/fishcpy/logo_c.png",
+            "statusCode": 301
+        }
+    ]
+}
