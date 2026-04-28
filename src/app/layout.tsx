@@ -31,6 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
+      <head>
+        <script defer src="https://um.fis.ink/script.js" data-website-id="354e0dfa-2de4-4e24-ac7f-5a5e0359515f"></script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
