@@ -15,6 +15,12 @@ export type Profile = {
     tags: string[];
     href: string;
   }>;
+  websites: Array<{
+    name: string;
+    description: string;
+    url: string;
+    tags: string[];
+  }>;
   posts: Array<{
     title: string;
     date: string;
@@ -77,6 +83,14 @@ export const profile: Profile = {
       description: "云端图床。",
       tags: ["图床"],
       href: "https://github.com/fishcpy/skyimage",
+    },
+  ],
+  websites: [
+    {
+      name: "博客",
+      description: "就是一个博客。",
+      url: "https://blog.fis.ink",
+      tags: ["博客"],
     },
   ],
   posts: [

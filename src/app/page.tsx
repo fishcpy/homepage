@@ -30,6 +30,9 @@ export default function Home() {
             <a className="hover:text-foreground" href="#projects">
               项目
             </a>
+            <a className="hover:text-foreground" href="#websites">
+              网站
+            </a>
             <a className="hover:text-foreground" href="#posts">
               文章
             </a>
@@ -106,6 +109,41 @@ export default function Home() {
                   <Button variant="outline" asChild className="w-fit">
                     <a href={project.href} target="_blank" rel="noreferrer">
                       查看项目
+                    </a>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <Separator />
+
+        <section id="websites" className="grid gap-8">
+          <div className="space-y-2">
+            <h2 className="text-2xl font-semibold tracking-tight">网站</h2>
+            <p className="text-muted-foreground">
+              我的在线网站与服务。
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {profile.websites.map((website) => (
+              <Card key={website.name} className="h-full">
+                <CardHeader>
+                  <CardTitle className="text-lg">{website.name}</CardTitle>
+                  <CardDescription>{website.description}</CardDescription>
+                </CardHeader>
+                <CardContent className="flex flex-col gap-4">
+                  <div className="flex flex-wrap gap-2">
+                    {website.tags.map((tag) => (
+                      <Badge key={tag} variant="secondary">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                  <Button variant="outline" asChild className="w-fit">
+                    <a href={website.url} target="_blank" rel="noreferrer">
+                      访问网站
                     </a>
                   </Button>
                 </CardContent>
