@@ -135,5 +135,6 @@
   html {
     @apply font-sans;
     scroll-behavior: smooth;
+    font-size: 18px;
   }
 }
