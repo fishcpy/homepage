@@ -53,7 +53,7 @@ export type Profile = {
 
 export const profile: Profile = {
   name: "fishcpy",
-  title: "你好👋",
+  title: "你好👋，我是",
   bio: "平时喜欢折腾点新奇的玩意，偶尔做点小网站&小项目。",
   location: "中国",
   avatarUrl: "https://file.fis.ink/img/fishcpy/logo_c.png",

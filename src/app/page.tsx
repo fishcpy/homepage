@@ -50,12 +50,12 @@ export default function Home() {
               <span>{profile.location}</span>
             </div>
             <div className="space-y-3">
-              <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-                {profile.name}
-              </h1>
               <p className="text-lg text-muted-foreground sm:text-xl">
                 {profile.title}
               </p>
+              <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+                {profile.name}
+              </h1>
             </div>
             <p className="max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
               {profile.bio}
