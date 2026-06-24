@@ -21,14 +21,8 @@ export type Profile = {
     url: string;
     tags: string[];
   }>;
-  posts: Array<{
-    title: string;
-    date: string;
-    summary: string;
-    href: string;
-  }>;
   contact: {
-    email: string;
+    emails: string[];
     city: string;
     status: string;
   };
@@ -48,5 +42,9 @@ export type Profile = {
       label: string;
       href: string;
     }>;
+    sponsor?: {
+      label: string;
+      href: string;
+    };
   };
 };

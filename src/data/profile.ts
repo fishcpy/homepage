@@ -25,6 +25,10 @@ export const profile: Profile = {
     nav: [
       { label: "首页", href: "#" },
     ],
+    sponsor: {
+      label: "z.fis.ink",
+      href: "https://z.fis.ink",
+    },
   },
   projects: [
     {
@@ -42,16 +46,8 @@ export const profile: Profile = {
       tags: ["博客"],
     },
   ],
-  posts: [
-    {
-      title: "测试",
-      date: "2026-03-18",
-      summary: "测试。",
-      href: "https://blog.fis.ink",
-    },
-  ],
   contact: {
-    email: "fishcpy@qq.com",
+    emails: ["fishcpy@qq.com", "fishcpy@furry.sarl"],
     city: "中国",
     status: "联系我",
   },
